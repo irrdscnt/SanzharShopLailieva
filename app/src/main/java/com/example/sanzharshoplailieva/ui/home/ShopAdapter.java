@@ -14,10 +14,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.sanzharshoplailieva.R;
 import com.example.sanzharshoplailieva.databinding.ItemProductBinding;
 import com.example.sanzharshoplailieva.models.ModelM;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,19 +80,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
             binding.nameProductCard.setText(modelM.getModelTitle());
             binding.priceCard.setText(String.valueOf(modelM.getModelPrice()));
             binding.descriptionCard.setText(modelM.getModelDescription());
-            binding.categoryCard.setText(modelM.getCategory());
 
-            Glide.with(context)
-                    .load(list.get(getAdapterPosition()).getModelImage())
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_launcher_background)
-                    .into(binding.imageCard);
-
+            Picasso.get().load(modelM.getModelImage()).into(binding.imageCard);
             binding.btnZoom.setOnClickListener(v -> {
                 selected_list.add(modelM);
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("see more", selected_list);
-                navController = Navigation.findNavController((Activity) itemView.getContext(), R.id.nav_host_fragment_activity_main);
+                navController = Navigation.findNavController((Activity) itemView.getContext(), R.id.nav_host);
                 navController.navigate(R.id.navigation_description, bundle);
                 Log.e("TAG", "pass data ! !");
             });

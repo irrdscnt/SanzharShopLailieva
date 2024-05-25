@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <TextView
+        android:id="@+id/signInSignOut"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/btn_bg01"
+        android:text="Registration/ \nSign in"
+        android:textAlignment="center"
+        android:textDirection="inherit"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_view_identify"
+        android:layout_marginLeft="156dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_bg01"
+        android:textAlignment="center"
+        android:textDirection="inherit"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ImageView
         android:id="@+id/basket_btn"
         android:layout_width="45dp"
@@ -25,6 +54,7 @@
         android:layout_marginTop="280dp"
         />
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="15dp"
         android:id="@+id/rv_catalog_m"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

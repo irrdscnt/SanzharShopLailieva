@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.sanzharshoplailieva.R;
 import com.example.sanzharshoplailieva.databinding.ItemDescBinding;
 import com.example.sanzharshoplailieva.models.ModelM;
 
@@ -57,7 +58,9 @@ public class DescAdapter extends RecyclerView.Adapter<DescAdapter.ViewHolder> {
             binding.nameCard.setText(modelM.getModelTitle());
             binding.priceCard.setText(String.valueOf(modelM.getModelPrice()));
             binding.descriptionCard.setText(modelM.getModelDescription());
-            Glide.with(itemView.getContext()).load(modelM.getModelImage()).into(binding.imageCard);
-        }
+            Glide.with(context)        .load(listD.get(getAdapterPosition()).getModelImage())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .into(binding.imageCard);        }
     }
 }

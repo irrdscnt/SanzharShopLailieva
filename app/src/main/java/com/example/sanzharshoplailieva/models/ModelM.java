@@ -26,17 +26,26 @@ public class ModelM implements Parcelable, Serializable {
     @SerializedName("image")
     @Expose
     String modelImage;
-    @SerializedName("category")
-    @Expose
-    String category;
+//    @SerializedName("counterProduct")
+//    @Expose
+//    int counterProduct;
 
-    public String getCategory() {
-        return category;
+    public ModelM(int modelId, String modelTitle, Double modelPrice, String modelDescription, String modelImage) {
+        this.modelId = modelId;
+        this.modelTitle = modelTitle;
+        this.modelPrice = modelPrice;
+        this.modelDescription = modelDescription;
+        this.modelImage = modelImage;
+//        this.counterProduct = counterProduct;
     }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+//
+//    public int getCounterProduct() {
+//        return counterProduct;
+//    }
+//
+//    public void setCounterProduct(int counterProduct) {
+//        this.counterProduct = counterProduct;
+//    }
 
     protected ModelM(Parcel in) {
         modelId = in.readInt();

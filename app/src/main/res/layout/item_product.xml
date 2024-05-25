@@ -115,7 +115,6 @@
                     android:src="@android:drawable/arrow_down_float"
                     />
             </LinearLayout>
-
         </LinearLayout>
         <ImageView
             android:id="@+id/tovar_favorite_check"

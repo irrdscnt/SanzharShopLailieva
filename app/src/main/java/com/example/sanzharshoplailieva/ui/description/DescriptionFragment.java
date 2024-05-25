@@ -51,7 +51,7 @@ public class DescriptionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.btnBack.setOnClickListener(v -> {
-            navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+            navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
             navController.navigate(R.id.action_navigation_description_to_navigation_home);
         });
 

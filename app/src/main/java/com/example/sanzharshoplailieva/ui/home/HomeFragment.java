@@ -1,6 +1,9 @@
 package com.example.sanzharshoplailieva.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,8 @@ public class HomeFragment extends Fragment {
     ShopAdapter adapter;
     HomeViewModel homeViewModel;
     NavController navController;
+    String emailUserIdentify;
+    SharedPreferences preferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,39 +51,53 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        preferences=getActivity()
+                .getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        if(getArguments()!=null){
+            emailUserIdentify=getArguments().getString("identify");
+        }
+        if(preferences.getBoolean("loggedin",true)){
+            binding.textViewIdentify.setVisibility(View.VISIBLE);
+            binding.textViewIdentify.setText(emailUserIdentify);
+
+
+        }
         Call<List<ModelM>> apiCall= RetrofitClient.getInstance().getApi().getStoreProducts();
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
             public void onResponse(Call<List<ModelM>> call, Response<List<ModelM>> response) {
                 if(response.body()!=null){
+                    binding.progressBar.setVisibility(View.INVISIBLE);
                     adapter=new ShopAdapter();
                     binding.rvCatalogM.setAdapter(adapter);
                     adapter.setList(response.body());
+                }else {
+                    Toast.makeText(requireActivity(),"No ability to get data",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<ModelM>> call, Throwable throwable) {
+                Log.e("TAG","NO DATA"+throwable.getLocalizedMessage());
                 Toast.makeText(requireActivity(),"NO DATA",Toast.LENGTH_SHORT).show();
             }
         });
 
-        homeViewModel.getModelMResponseLiveData().observe(getViewLifecycleOwner(), new Observer<List<ModelM>>() {
-            @Override
-            public void onChanged(List<ModelM> modelMS) {
-                binding.progressBar.setVisibility(View.INVISIBLE);
-
-                adapter = new ShopAdapter(requireActivity(), modelMS);
-                binding.rvCatalogM.setAdapter(adapter);
-            }
-        });
-        setUpOnBackPressed();
+//        homeViewModel.getModelMResponseLiveData().observe(getViewLifecycleOwner(), new Observer<List<ModelM>>() {
+//            @Override
+//            public void onChanged(List<ModelM> modelMS) {
+//                binding.progressBar.setVisibility(View.INVISIBLE);
+//
+//                adapter = new ShopAdapter(requireActivity(), modelMS);
+//                binding.rvCatalogM.setAdapter(adapter);
+//            }
+//        });
+//        setUpOnBackPressed();
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.basketBtn.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(requireActivity(), binding.basketBtn);
             popup.getMenuInflater().inflate(R.menu.action_menu, popup.getMenu());
@@ -88,7 +107,7 @@ public class HomeFragment extends Fragment {
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getTitle().toString()) {
                         case "Добавить в корзину":
-                            navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+                            navController = Navigation.findNavController(requireActivity(), R.id.nav_host);
 
                             Bundle bundle = new Bundle();
                             bundle.putParcelableArrayList("keysss_basket", adapter.getSelected_intoBasketList());
@@ -104,6 +123,10 @@ public class HomeFragment extends Fragment {
                 }
             });
             popup.show();
+        });
+        binding.signInSignOut.setOnClickListener(v1->{
+            navController=Navigation.findNavController(requireActivity(),R.id.nav_host);
+            navController.navigate(R.id.action_navigation_home_to_registerFragment);
         });
     }
 
