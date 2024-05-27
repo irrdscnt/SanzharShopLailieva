@@ -33,7 +33,7 @@
             android:id="@+id/card_visa"
             android:layout_width="140dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="#CAC7C7"
+            app:cardBackgroundColor="#BAFFFB"
             app:cardCornerRadius="26dp"
             android:layout_marginRight="10dp">
             <ImageView
@@ -47,7 +47,7 @@
             android:id="@+id/card_mastercard"
             android:layout_width="140dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="#CAC7C7"
+            app:cardBackgroundColor="#BAFFFB"
             app:cardCornerRadius="26dp"
             android:layout_marginLeft="10dp"
             >
@@ -68,7 +68,7 @@
             android:id="@+id/card_google"
             android:layout_width="140dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="#CAC7C7"
+            app:cardBackgroundColor="#BAFFFB"
             app:cardCornerRadius="26dp"
             android:layout_marginRight="10dp" >
             <ImageView
@@ -82,7 +82,7 @@
             android:id="@+id/card_m_bank"
             android:layout_width="140dp"
             android:layout_height="90dp"
-            app:cardBackgroundColor="#CAC7C7"
+            app:cardBackgroundColor="#BAFFFB"
             app:cardCornerRadius="26dp"
             android:layout_marginLeft="10dp"
             >
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:cornerRadius="20dp"
-        android:backgroundTint="@color/cardview_shadow_end_color"
+        android:backgroundTint="#17EF34"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"

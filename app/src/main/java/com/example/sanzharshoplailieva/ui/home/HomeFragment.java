@@ -51,17 +51,25 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        preferences=getActivity()
-                .getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-        if(getArguments()!=null){
-            emailUserIdentify=getArguments().getString("identify");
-        }
-        if(preferences.getBoolean("loggedin",true)){
+        preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        emailUserIdentify = preferences.getString("email", null);
+
+        // Отображение данных пользователя в tvIdentify
+        if (emailUserIdentify != null && !emailUserIdentify.isEmpty()) {
             binding.textViewIdentify.setVisibility(View.VISIBLE);
             binding.textViewIdentify.setText(emailUserIdentify);
-
-
         }
+//        preferences=getActivity()
+//                .getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+//        if(getArguments()!=null){
+//            emailUserIdentify=getArguments().getString("identify");
+//        }
+//        if(preferences.getBoolean("loggedin",true)){
+//            binding.textViewIdentify.setVisibility(View.VISIBLE);
+//            binding.textViewIdentify.setText(emailUserIdentify);
+//
+//
+//        }
         Call<List<ModelM>> apiCall= RetrofitClient.getInstance().getApi().getStoreProducts();
         apiCall.enqueue(new Callback<List<ModelM>>() {
             @Override
